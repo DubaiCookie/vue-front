@@ -1,0 +1,42 @@
+.pageRoot {
+  position: relative;
+}
+
+.quantitySection {
+  margin-top: 24px;
+}
+
+.quantityCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid var(--BORDER-LIGHT);
+}
+
+.quantityButton {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid var(--BORDER-LIGHT);
+  background: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.quantityValue {
+  font-size: 18px;
+  font-weight: var(--font-semibold);
+  min-width: 24px;
+  text-align: center;
+}
+
+.bottomSpacer {
+  height: var(--bottom-cta-safe-area);
+}
+
+.payButton {
+  margin-top: 0;
+}
