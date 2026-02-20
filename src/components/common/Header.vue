@@ -21,12 +21,12 @@
             <span :class="styles.userName">{{ username }}</span>
             <span>님</span>
           </p>
-          <IoNotifications :class="styles.icon" />
+          <Icon icon="ion:notifications" :class="styles.icon" />
         </template>
         <template v-else>
           <router-link to="/login" :class="['flex-row', styles.headerText]">
             <p :class="styles.smallText">로그인</p>
-            <FiLogIn :class="styles.icon" />
+            <Icon icon="feather:log-in" :class="styles.icon" />
           </router-link>
         </template>
       </div>
@@ -52,8 +52,7 @@ import { useAuthStore } from '@/stores/auth'
 import { useQueueStore } from '@/stores/queue'
 import { boardQueue } from '@/api/queue.api'
 import Modal from '@/components/common/modals/Modal.vue'
-import { IoNotifications } from 'react-icons/io5'
-import { FiLogIn } from 'react-icons/fi'
+import { Icon } from '@iconify/vue'
 import styles from '@/components/common/Header.module.css'
 
 type BoardingModalMode = "confirm" | "success" | "failed" | null

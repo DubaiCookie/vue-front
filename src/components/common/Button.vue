@@ -5,7 +5,7 @@
     :disabled="disabled"
     @click="emit('click', $event)"
   >
-    <slot />
+    <slot>{{ title }}</slot>
   </button>
 </template>
 
@@ -20,6 +20,8 @@ interface Props {
   size?: 'small' | 'medium' | 'large'
   disabled?: boolean
   fullWidth?: boolean
+  title?: string
+  className?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -42,7 +44,8 @@ const buttonClasses = computed(() =>
     {
       [styles.fullWidth]: props.fullWidth,
       [styles.disabled]: props.disabled,
-    }
+    },
+    props.className
   )
 )
 </script>

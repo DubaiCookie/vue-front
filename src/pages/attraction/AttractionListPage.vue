@@ -1,38 +1,80 @@
 <template>
-  <div :class="styles.container">
-    <h1>어트랙션 목록</h1>
-    <div v-if="isLoading">로딩 중...</div>
-    <div v-else-if="error">에러가 발생했습니다</div>
-    <div v-else-if="attractions" :class="styles.list">
-      <div
-        v-for="attraction in attractions"
-        :key="attraction.attractionId"
-        :class="styles.item"
-        @click="goToDetail(attraction.attractionId)"
-      >
-        <img :src="attraction.imageUrl" :alt="attraction.name" :class="styles.image" />
-        <h2 :class="styles.name">{{ attraction.name }}</h2>
-        <p :class="styles.description">{{ attraction.description }}</p>
-        <p :class="styles.waitTime">대기 시간: {{ attraction.generalWaitingTime }}분</p>
+  <div :class="['container', styles.listPage]">
+    <LoadingSpinner v-if="isLoading" />
+    <div class="page-title">
+      <div class="glass title-icon-container">
+        <Icon icon="mdi:roller-coaster" class="title-icon" />
       </div>
+      <span>Attractions</span>
     </div>
+    <AttractionList v-if="attractions" :attractions="attractions" />
+    <div :class="styles.listBottomSpacer" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useQuery } from '@tanstack/vue-query'
-import { useRouter } from 'vue-router'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { Icon } from '@iconify/vue'
+import AttractionList from '@/components/attraction/AttractionList.vue'
+import LoadingSpinner from '@/components/common/LoadingSpinner.vue'
 import { getAttractionList } from '@/api/attraction.api'
-import styles from '@/pages/attraction/Attraction.module.css'
+import { subscribeRidesMinutes } from '@/api/ws'
+import type { AttractionSummary } from '@/types/attraction'
+import styles from './Attraction.module.css'
 
-const router = useRouter()
+const attractions = ref<AttractionSummary[]>([])
+const isLoading = ref(false)
 
-const { data: attractions, isLoading, error } = useQuery({
-  queryKey: ['attractions'],
-  queryFn: getAttractionList,
+// TODO: error handling 필요
+onMounted(async () => {
+  try {
+    isLoading.value = true
+    const data = await getAttractionList()
+    attractions.value = data
+  } catch (error) {
+    console.error(error)
+  } finally {
+    isLoading.value = false
+  }
 })
 
-function goToDetail(id: number) {
-  router.push(`/attraction/${id}`)
-}
+// WebSocket 구독으로 실시간 대기시간 업데이트
+let unsubscribe: (() => void) | null = null
+
+onMounted(() => {
+  unsubscribe = subscribeRidesMinutes((payload) => {
+    if (attractions.value.length === 0) {
+      return
+    }
+
+    const waitingByRideId = new Map(
+      payload.rides.map((ride) => [ride.rideId, ride.estimatedWaitMinutes]),
+    )
+    let hasChanged = false
+    const next = attractions.value.map((attraction) => {
+      const nextWaitingMinutes = waitingByRideId.get(attraction.attractionId)
+      if (
+        nextWaitingMinutes === undefined ||
+        nextWaitingMinutes === attraction.generalWaitingTime
+      ) {
+        return attraction
+      }
+      hasChanged = true
+      return {
+        ...attraction,
+        generalWaitingTime: nextWaitingMinutes,
+      }
+    })
+
+    if (hasChanged) {
+      attractions.value = next
+    }
+  })
+})
+
+onUnmounted(() => {
+  if (unsubscribe) {
+    unsubscribe()
+  }
+})
 </script>

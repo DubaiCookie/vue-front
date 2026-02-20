@@ -18,7 +18,7 @@
     />
     <div class="page-title">
       <div :class="['glass', 'title-icon-container']">
-        <MdOutlinePayment class="title-icon" />
+        <Icon icon="material-symbols:payment-outline" class="title-icon" />
       </div>
       <span>Ticket Order</span>
     </div>
@@ -55,7 +55,7 @@
     <div class="button-bottom">
       <Button
         :title="isSubmitting ? '결제 준비 중...' : '결제하기'"
-        :class-name="styles.payButton"
+        :className="styles.payButton"
         :disabled="!selectedDate || !selectedTicketType || isSubmitting || !authStore.userId"
         @click="handlePayClick"
       />
@@ -65,7 +65,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { MdOutlinePayment } from 'react-icons/md'
+import { Icon } from '@iconify/vue'
 import Calendar from '@/components/common/Calendar.vue'
 import TicketTypeList from '@/components/ticket/TicketTypeList.vue'
 import type { TicketKind } from '@/types/ticket'

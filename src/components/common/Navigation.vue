@@ -7,7 +7,7 @@
       :class="styles.navItem"
       :aria-label="item.label"
     >
-      <component :is="item.icon" :class="styles.navIcon" />
+      <Icon :icon="item.icon" :class="styles.navIcon" />
       <span :class="styles.navText">{{ item.text }}</span>
     </router-link>
   </nav>
@@ -16,8 +16,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
-import { IoTicket, IoList, IoPerson } from 'react-icons/io5'
-import { GiRollerCoaster } from 'react-icons/gi'
+import { Icon } from '@iconify/vue'
 import styles from '@/components/common/Navigation.module.css'
 
 const authStore = useAuthStore()
@@ -27,7 +26,7 @@ const navItems = computed(() => {
   const items = [
     {
       to: '/attraction',
-      icon: GiRollerCoaster,
+      icon: 'game-icons:roller-coaster',
       label: '어트랙션 페이지로 이동',
       text: '어트랙션',
     },
@@ -37,19 +36,19 @@ const navItems = computed(() => {
     items.push(
       {
         to: '/ticket',
-        icon: IoTicket,
+        icon: 'ion:ticket',
         label: '티켓 페이지로 이동',
         text: '티켓',
       },
       {
         to: '/waiting',
-        icon: IoList,
+        icon: 'ion:list',
         label: '대기열 페이지로 이동',
         text: '대기열',
       },
       {
         to: '/mypage',
-        icon: IoPerson,
+        icon: 'ion:person',
         label: '마이페이지로 이동',
         text: '마이페이지',
       }
