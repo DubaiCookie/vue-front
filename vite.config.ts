@@ -18,13 +18,13 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://baeminjun.store',
+        target: 'http://localhost:8080',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
       '/ws': {
-        target: 'wss://baeminjun.store',
+        target: 'ws://localhost:8080',
         ws: true,
         changeOrigin: true,
         secure: false,
