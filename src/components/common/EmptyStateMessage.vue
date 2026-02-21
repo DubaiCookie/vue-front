@@ -1,6 +1,6 @@
 <template>
   <div :class="styles.container">
-    <p :class="styles.message">{{ message }}</p>
+    <p :class="styles.message">{{ target }} 없습니다.</p>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import styles from '@/components/common/EmptyStateMessage.module.css'
 
 interface Props {
-  message: string
+  target: string
 }
 
 defineProps<Props>()

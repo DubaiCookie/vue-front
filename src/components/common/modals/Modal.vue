@@ -4,7 +4,7 @@
       <div v-if="isOpen" :class="styles.overlay" @click="handleOverlayClick">
         <div :class="styles.modal" role="dialog" aria-modal="true">
           <h2 :class="styles.title">{{ title }}</h2>
-          <p :class="styles.content">{{ content }}</p>
+          <div :class="styles.content" v-html="content"></div>
           <div :class="styles.buttonGroup">
             <button
               type="button"

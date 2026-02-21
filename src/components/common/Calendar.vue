@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, useMemo } from 'vue'
+import { ref, computed } from 'vue'
 import styles from '@/components/common/Calendar.module.css'
 
 type CalendarDateInput = string | Date
@@ -101,12 +101,12 @@ function addMonths(base: Date, months: number) {
   return new Date(base.getFullYear(), base.getMonth() + months, 1)
 }
 
-const today = useMemo(() => normalizeStartOfDay(new Date()))
-const maxDate = useMemo(() => {
+const today = normalizeStartOfDay(new Date())
+const maxDate = (() => {
   const date = new Date(today)
   date.setDate(today.getDate() + 30)
   return date
-})
+})()
 
 const unavailableDateSet = computed(() => {
   return new Set(props.unavailableDates.map((item) => normalizeToDateKey(item)))
@@ -116,7 +116,7 @@ const selectedDateKey = ref<string | null>(
   props.initialSelectedDate ? normalizeToDateKey(props.initialSelectedDate) : null
 )
 
-const monthPages = useMemo(() => {
+const monthPages = (() => {
   const startMonth = normalizeStartOfMonth(today)
   const endMonth = normalizeStartOfMonth(maxDate)
 
@@ -127,7 +127,7 @@ const monthPages = useMemo(() => {
     pages.push(cursor)
   }
   return pages
-})
+})()
 
 const monthIndex = ref(0)
 const currentMonth = computed(() => monthPages[monthIndex.value] ?? monthPages[0])

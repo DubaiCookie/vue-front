@@ -11,7 +11,7 @@
     />
     <div :class="clsx('page-title')">
       <div :class="clsx('glass', 'title-icon-container')">
-        <IoTicket :class="clsx('title-icon')" />
+        <Icon icon="ion:ticket" :class="clsx('title-icon')" />
       </div>
       <span>My Ticket</span>
     </div>
@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import clsx from 'clsx'
-import { IoTicket } from 'react-icons/io5'
+import { Icon } from '@iconify/vue'
 import type { UserTicket } from '@/types/ticket'
 import TicketList from '@/components/ticket/TicketList.vue'
 import Button from '@/components/common/Button.vue'
