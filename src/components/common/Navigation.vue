@@ -26,7 +26,7 @@ const navItems = computed(() => {
   const items = [
     {
       to: '/attraction',
-      icon: 'game-icons:roller-coaster',
+      icon: 'mdi:ferris-wheel',
       label: '어트랙션 페이지로 이동',
       text: '어트랙션',
     },

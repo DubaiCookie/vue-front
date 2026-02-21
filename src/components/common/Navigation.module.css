@@ -9,21 +9,33 @@
     z-index: 50;
     display: flex;
     align-items: center;
+    justify-content: space-around;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
     background-color: var(--WHITE);
     padding: 0 25px env(safe-area-inset-bottom);
 }
 
-.icon {
-    width: 28px;
-    height: auto;
+.navItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    text-decoration: none;
     color: var(--SECONDARY-PINK);
+    transition: color 0.15s ease;
 }
 
-.active .icon {
+.navItem:global(.router-link-active) {
     color: var(--PRIMARY-PINK);
 }
 
-.navLink {
-    transition: color 0.15s ease;
+.navIcon {
+    width: 28px;
+    height: 28px;
+}
+
+.navText {
+    font-size: 12px;
+    font-weight: 500;
 }
