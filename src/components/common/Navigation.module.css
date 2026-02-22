@@ -3,8 +3,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    margin: 0 auto;
-    width: min(100vw, var(--app-max-width));
+    width: 100%;
     height: calc(var(--navigation-height) + env(safe-area-inset-bottom));
     z-index: 50;
     display: flex;
@@ -12,7 +11,7 @@
     justify-content: space-around;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
     background-color: var(--WHITE);
-    padding: 0 25px env(safe-area-inset-bottom);
+    padding: 0 16px env(safe-area-inset-bottom);
 }
 
 .navItem {

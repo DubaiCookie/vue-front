@@ -1,5 +1,6 @@
 .pageRoot {
   position: relative;
+  min-height: calc(100svh - var(--header-height) - var(--content-bottom-safe-area));
 }
 
 .bottomSpacer {

@@ -16,9 +16,14 @@
       @close="isSuccessModalOpen = false"
       @button-click="handleSuccessModalClose"
     />
-    <div :class="['container', 'flex-column']">
-      <div :class="[styles.block, 'flex-column']">
-        <div :class="[styles.title, 'page-title']">Log in</div>
+    <div :class="['container', styles.authPage]">
+      <div :class="[styles.block, styles.authContent]">
+        <div class="page-title">
+          <div class="glass title-icon-container">
+            <Icon icon="ion:log-in-outline" class="title-icon" />
+          </div>
+          <span :class="styles.title">Log in</span>
+        </div>
         <InputForm :fields="loginFields" submit-label="로그인" @submit="handleLogin" />
         <router-link to="/signup" :class="styles.smallText">회원이 아니신가요?</router-link>
       </div>
@@ -30,6 +35,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import { Icon } from '@iconify/vue'
 import InputForm from '@/components/common/inputs/InputForm.vue'
 import Modal from '@/components/common/modals/Modal.vue'
 import type { FieldSpec, LoginUser } from '@/types/user'

@@ -3,7 +3,8 @@
 }
 
 .detailPage {
-  padding: 0 0 var(--bottom-cta-safe-area);
+  padding: 0 16px var(--bottom-cta-safe-area);
+  overflow-x: clip;
 }
 
 .hero {

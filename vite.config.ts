@@ -16,15 +16,16 @@ export default defineConfig({
     },
   },
   server: {
+    port: 3001,
+    strictPort: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'https://baeminjun.store',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ''),
       },
       '/ws': {
-        target: 'ws://localhost:8080',
+        target: 'wss://baeminjun.store',
         ws: true,
         changeOrigin: true,
         secure: false,

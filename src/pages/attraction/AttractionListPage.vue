@@ -3,7 +3,7 @@
     <LoadingSpinner v-if="isLoading" />
     <div class="page-title">
       <div class="glass title-icon-container">
-        <Icon icon="mdi:roller-coaster" class="title-icon" />
+        <Icon icon="mdi:ferris-wheel" class="title-icon" />
       </div>
       <span>Attractions</span>
     </div>

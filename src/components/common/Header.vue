@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <Modal
-      :is-open="boardingModalMode !== null"
-      :title="modalTitle"
-      :content="modalContent"
-      button-title="확인"
-      @close="handleModalClose"
-      @button-click="handleModalButtonClick"
-    />
+  <Modal
+    :is-open="boardingModalMode !== null"
+    :title="modalTitle"
+    :content="modalContent"
+    button-title="확인"
+    @close="handleModalClose"
+    @button-click="handleModalButtonClick"
+  />
 
-    <header :class="[styles.root, 'container', 'flex-row']">
+  <Teleport to="body">
+    <header :class="[styles.root, 'flex-row']">
       <router-link to="/attraction" :class="styles.logoLink" aria-label="WayThing 홈으로 이동">
         <img src="/logo-mark.svg" alt="" :class="styles.logoIcon" />
         <span :class="styles.logoText">WayThing</span>
@@ -43,7 +43,7 @@
       <span :class="styles.queueAlertRideName">{{ queueAlert.rideName }}</span>
       <span :class="styles.queueAlertBody">{{ queueAlertBodyText }}</span>
     </button>
-  </div>
+  </Teleport>
 </template>
 
 <script setup lang="ts">

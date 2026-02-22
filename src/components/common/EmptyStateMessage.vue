@@ -1,5 +1,5 @@
 <template>
-  <div :class="styles.container">
+  <div :class="styles.root">
     <p :class="styles.message">{{ target }} 없습니다.</p>
   </div>
 </template>
